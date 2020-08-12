@@ -14,7 +14,9 @@ sudo micromdm serve \
   -api-key MySecretAPIKey \
   -filerepo /path/to/pkg/folder \
   -tls-cert /path/to/tls.crt \
-  -tls-key  /path/to/tls.key
+  -tls-key  /path/to/tls.key \
+  -scep-client-validity 1080 \
+  -no-command-history
 ```
 
 - `server-url` MUST be the `https://` URL you(and your devices) will use to connect to MicroMDM.
@@ -24,6 +26,8 @@ sudo micromdm serve \
 - `tls-*` flags are used to specify the path to your TLS certificate and key. You MUST configure them if `micromdm` will terminate connections to a device.  
 If you prefer to terminate TLS with a loadbalancer, you can set `-tls=false`. 
 **NOTE**: You must use the `-flag=false` form to turn off a boolean flag.
+- `scep-client-validity` is an optional key to extend your SCEP client certificate validity from the default 1 year, in the example 3 years is set as an example one would set to match the lengh of their device lease.
+- `no-command-history` is an optional key to keep your micromdm `db` lean.
 
 Command line flags are used for configuration, because they are easy to discover and document.  
 For a full list of available configurations and their usage, run `micromdm -help`.  
